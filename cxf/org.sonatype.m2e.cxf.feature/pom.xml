@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright (c) 2008 Sonatype, Inc.
+  Copyright (c) 2010-2012 Sonatype, Inc.
   All rights reserved. This program and the accompanying materials
   are made available under the terms of the Eclipse Public License v1.0
   which accompanies this distribution, and is available at
@@ -10,20 +10,22 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.sonatype.m2e.extras</groupId>
-    <artifactId>m2eclipse-extras</artifactId>
+    <groupId>org.sonatype.m2e.cxf</groupId>
+    <artifactId>org.sonatype.m2e.cxf.parent</artifactId>
     <version>0.14.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>org.sonatype.m2e.cxf.feature</artifactId>
   <packaging>eclipse-feature</packaging>
-  <name>M2E Connector for CXF</name>
-  
+
+  <name>M2E Connector for CXF Codegen Plug-in Feature</name>
+
   <build>
     <plugins>
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>tycho-packaging-plugin</artifactId>
+        <version>${tycho-version}</version>
         <configuration>
           <deployableFeature>true</deployableFeature>
         </configuration>
@@ -31,6 +33,7 @@
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>tycho-p2-plugin</artifactId>
+        <version>${tycho-version}</version>
         <executions>
           <execution>
             <id>categorization</id>
@@ -41,28 +44,9 @@
           </execution>
         </executions>
         <configuration>
-          <metadataRepositoryName>${project.name}</metadataRepositoryName>
-          <artifactRepositoryName>${project.name}</artifactRepositoryName>
+          <metadataRepositoryName>M2E Connector for CXF Codegen Plug-in</metadataRepositoryName>
+          <artifactRepositoryName>M2E Connector for CXF Codegen Plug-in</artifactRepositoryName>
         </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <configuration>
-          <descriptors>
-            <descriptor>src/main/assembly/assembly.xml</descriptor>
-          </descriptors>
-        </configuration>
-        <executions>
-          <execution>
-            <id>make-assembly</id>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>
@@ -87,7 +71,7 @@
                   <file>${project.build.directory}/${project.artifactId}-${project.version}-site.zip</file>
                   <serverId>forge-releases</serverId>
                   <repositoryUrl>${m2e.site-compressed}</repositoryUrl>
-                  <repositoryPath>m2e/${unqualifiedVersion}/N/${unqualifiedVersion}.${buildQualifier}</repositoryPath>
+                  <repositoryPath>m2eclipse-cxf/${unqualifiedVersion}/N/${unqualifiedVersion}.${buildQualifier}</repositoryPath>
                 </configuration>
               </execution>
             </executions>
@@ -95,33 +79,6 @@
         </plugins>
       </build>
     </profile>
+  </profiles>
 
-    <profile>
-      <id>publish-site-latest</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.sonatype.plugins</groupId>
-            <artifactId>maven-upload-plugin</artifactId>
-            <version>0.0.1</version>
-            <executions>
-              <execution>
-                <id>publish-site-latest</id>
-                <phase>deploy</phase>
-                <goals>
-                  <goal>upload-file</goal>
-                </goals>
-                <configuration>
-                  <file>${project.build.directory}/${project.artifactId}-${project.version}-site.zip</file>
-                  <serverId>forge-releases</serverId>
-                  <repositoryUrl>${m2e.site-compressed}</repositoryUrl>
-                  <repositoryPath>m2e/${unqualifiedVersion}/N/LATEST</repositoryPath>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>  
 </project>
