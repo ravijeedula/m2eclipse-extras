@@ -5,7 +5,7 @@
       <pluginExecutionFilter>
         <groupId>org.apache.cxf</groupId>
         <artifactId>cxf-codegen-plugin</artifactId>
-        <versionRange>[2.4.1,)</versionRange>
+        <versionRange>[2.3.0,)</versionRange>
         <goals>
           <goal>wsdl2java</goal>
         </goals>
