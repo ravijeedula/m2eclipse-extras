@@ -1,2 +1,0 @@
-Built-By: You know who
-Class-Path: custom.jar
